@@ -68,9 +68,7 @@ module.exports = {
   appNodeModules: resolveApp("node_modules"),
   swSrc: resolveModule(resolveApp, "src/service-worker"),
   publicUrlOrPath,
-};
-
-module.exports = {
-  moduleFileExtensions: moduleFileExtensions,
   styles: resolveApp("src/styles"),
 };
+
+module.exports.moduleFileExtensions = moduleFileExtensions;
