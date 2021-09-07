@@ -6,10 +6,17 @@ import TodoList from "./TodoList";
 class App extends Component {
   state = {
     input: "", // input 값
+    // 일정 데이터 초깃값
     todos: [
       { id: 0, text: "리액트 공부하기", done: true },
       { id: 1, text: "컴포넌트 스타일링 해보기", done: false },
     ],
+  };
+
+  id = 1;
+  // 일정 데이터에 들어가는 id 값
+  getId = () => {
+    return ++this.id; // 현재 값에서 1을 더한 값을 반환
   };
 
   handleChange = (e) => {
@@ -19,12 +26,34 @@ class App extends Component {
     });
   };
 
+  // 새 데이터 추가
+  handleInsert = () => {
+    const { todos, input } = this.state;
+
+    // 새 데이터 객체 만들기
+    const newTodo = {
+      text: input,
+      done: false,
+      id: this.getId(),
+    };
+
+    // 배열 안에 새 데이터를 집어넣습니다.
+    this.setState({
+      todos: [...todos, newTodo],
+      input: "",
+    });
+  };
+
   render() {
     const { input, todos } = this.state;
-    const { handleChange } = this;
+    const { handleChange, handleInsert } = this;
     return (
       <PageTemplate>
-        <TodoInput onChange={handleChange} value={input} />
+        <TodoInput
+          onChange={handleChange}
+          value={input}
+          onInsert={handleInsert}
+        />
         <TodoList todos={todos} />
       </PageTemplate>
     );
