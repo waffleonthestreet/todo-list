@@ -6,6 +6,10 @@ const cx = className.bind(styles);
 
 // 나중에 성능을 최적화할 때 shouldComponentUpdate 라이프사이클 메서드를 사용해야 하기 때문에 class 문법으로 생성
 class TodoItem extends Component {
+  shouldComponentUpdate(nextProps, nextState) {
+    return this.props.done !== nextProps.done;
+  }
+
   render() {
     const { done, children, onToggle, onRemove } = this.props;
     /*
